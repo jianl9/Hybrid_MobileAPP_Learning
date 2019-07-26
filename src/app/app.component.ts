@@ -12,9 +12,9 @@ import { ContactPage } from '../pages/contact/contact';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav; // Navigation Controller
 
-  rootPage: any = HomePage;
+  rootPage: any = HomePage; // setting root page
 
   pages: Array<{title: string, icon: string, component: any}>;
 
@@ -43,6 +43,16 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page.component); // page.component refers to this.pages
   }
+
+  // when you navigate to any other page,
+  // each of these pages are root pages of our Ionic application.
+  // And when we click on them as we understood by calling the open page method on the at component.ts file
+  // you're setting the particular page as the root page.
+  // But when you navigate from the menu to one of its detail of the dish page here,
+  // that is a parent-to-child navigation that you see here. And the back causes the pop of the page automatically.
+  // So the Back button automatically causes the pop, and then takes you back to the earlier page in the history.
+  // only parent-child pages trigger history stack-like push and pop
+
 }
