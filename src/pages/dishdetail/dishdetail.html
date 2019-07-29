@@ -55,4 +55,24 @@
     </ion-item>
   </ion-list>
 
+<!--  if favorite exists, hide this hallow heart button.
+this particular button will be displayed only if the dish is not the user's favorite.
+This outer ion-fab is just used as a container for a fab button here.
+So if we use it this way, then this button will be at a fixed location in the view.
+If we just include a button ion-fab - just this part -
+then this button will be scrollable; so as the view scrolls, the button will also scroll.
+But in this case, I want this button to be fixed at the bottom right corner of my view,
+so that's the reason why we enclose this inside an ion-fab here.-->
+  <ion-fab bottom right [hidden]="favorite">
+    <button ion-fab (click)="addToFavorites()">
+      <ion-icon name="heart-outline"></ion-icon>
+    </button>
+  </ion-fab>
+<!--  if favorite exists, add this heart solid button-->
+  <ion-fab bottom right *ngIf="favorite">
+    <button ion-fab>
+      <ion-icon name="heart"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>
