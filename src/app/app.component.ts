@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -8,6 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
 import { FavoritesPage } from "../pages/favorites/favorites";
+import { ReservationPage } from "../pages/reservation/reservation";
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +20,8 @@ export class MyApp {
 
   pages: Array<{title: string, icon: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -56,5 +58,10 @@ export class MyApp {
   // that is a parent-to-child navigation that you see here. And the back causes the pop of the page automatically.
   // So the Back button automatically causes the pop, and then takes you back to the earlier page in the history.
   // only parent-child pages trigger history stack-like push and pop
+
+  openReserve() {
+    let modal = this.modalCtrl.create(ReservationPage);
+    modal.present();
+  }
 
 }
