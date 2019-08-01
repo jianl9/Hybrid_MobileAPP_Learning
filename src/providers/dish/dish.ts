@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Dish } from '../../shared/dish';
 import { Observable } from 'rxjs/Observable';
 /* tslint:disable:no-unused-variable */
-import { Http, Response } from '@angular/http';
+import {Http, RequestOptions, Response, Headers} from '@angular/http';
 import { baseURL } from '../../shared/baseurl';
 import { ProcessHttpmsgProvider } from '../process-httpmsg/process-httpmsg';
 import 'rxjs/add/operator/map';
@@ -35,6 +35,15 @@ export class DishProvider {
   getFeaturedDish(): Observable<Dish> {
     return this.http.get(baseURL + 'dishes?featured=true')
       .map(res => { return this.processHTTPMsgService.extractData(res)[0]; })
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
+  }
+
+  putDish(dish: Dish): Observable<Dish> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(baseURL + 'dishes/' + dish.id, dish, options)
+      .map(res => { return this.processHTTPMsgService.extractData(res); })
       .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
